@@ -19,25 +19,15 @@ header{
     padding:15px;
     border-bottom:4px solid #e91e63;
 }
-header h1{
-    margin:5px 0;
-    color:#e91e63;
-}
-header p{
-    margin:2px 0;
-    font-size:18px;
-}
+header h1{color:#e91e63;margin:5px 0;}
 
 /* CONTAINER */
-.container{
-    max-width:900px;
-    margin:auto;
-}
+.container{max-width:900px;margin:auto;}
 
-/* GRID DE PRODUTOS */
+/* GRID */
 .produtos{
     display:grid;
-    grid-template-columns:repeat(2, 1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:15px;
     padding:10px;
 }
@@ -49,37 +39,20 @@ header p{
     overflow:hidden;
     box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
-.card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-}
-.card-content{
-    padding:12px;
-}
-.card-content h3{
-    margin:0;
-    color:#5e1675;
-    font-size:18px;
-}
+.card img{width:100%;height:220px;object-fit:cover;}
+.card-content{padding:12px;}
+.card-content h3{margin:0;color:#5e1675;}
 
-/* TAMANHOS */
-.sizes{
-    margin-top:10px;
-}
+/* BOTÕES */
 .sizes button{
     width:100%;
-    padding:10px;
     margin-top:6px;
+    padding:10px;
     border:none;
     border-radius:8px;
     background:#e91e63;
     color:#fff;
-    font-size:14px;
     cursor:pointer;
-}
-.sizes button:hover{
-    opacity:0.9;
 }
 
 /* FORM */
@@ -89,53 +62,121 @@ header p{
     padding:15px;
     border-radius:15px;
 }
-input, textarea{
+input,textarea{
     width:100%;
     padding:10px;
     margin:6px 0;
     border-radius:8px;
     border:1px solid #ccc;
-    font-size:14px;
 }
-.total{
-    font-size:18px;
-    font-weight:bold;
-    text-align:center;
-    margin:10px 0;
-}
+.total{text-align:center;font-size:18px;font-weight:bold;}
 .enviar{
     width:100%;
     padding:12px;
-    border:none;
-    border-radius:10px;
     background:#5e1675;
     color:#fff;
-    font-size:16px;
+    border:none;
+    border-radius:10px;
+}
+
+/* CUPOM */
+.cupom-box{
+    display:flex;
+    gap:5px;
+}
+.cupom-box button{
+    background:#e91e63;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:10px;
+}
+
+/* CARRINHO */
+.cart-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:60px;
+    height:60px;
+    background:#5e1675;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+    cursor:pointer;
+    z-index:1000;
+}
+.cart-count{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    background:#e91e63;
+    color:#fff;
+    font-size:12px;
+    padding:4px 7px;
+    border-radius:50%;
+}
+
+/* MODAL */
+.cart-modal{
+    display:none;
+    position:fixed;
+    bottom:90px;
+    right:20px;
+    width:320px;
+    background:#fff;
+    border-radius:15px;
+    padding:15px;
+    box-shadow:0 6px 15px rgba(0,0,0,.3);
+    z-index:1000;
+}
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
+    font-size:14px;
+}
+.qtd{
+    display:flex;
+    gap:5px;
+}
+.qtd button{
+    width:25px;
+    height:25px;
+    border:none;
+    border-radius:5px;
+    background:#e91e63;
+    color:#fff;
     cursor:pointer;
 }
 
-/* PIX */
-#pixBox{
-    display:none;
-    margin-top:10px;
-    background:#f1f1f1;
-    padding:10px;
-    border-radius:8px;
-}
-
-/* FOOTER */
-.footer{
-    text-align:center;
+/* TOAST */
+.toast{
+    position:fixed;
+    bottom:100px;
+    left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:#323232;
     color:#fff;
-    font-size:13px;
-    padding:15px;
+    padding:12px 18px;
+    border-radius:30px;
+    opacity:0;
+    transition:.4s;
+    z-index:2000;
+    font-size:14px;
+}
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
 }
 
 /* RESPONSIVO */
-@media (min-width:768px){
-    .produtos{
-        grid-template-columns:repeat(3, 1fr);
-    }
+@media(min-width:768px){
+    .produtos{grid-template-columns:repeat(3,1fr);}
 }
 </style>
 </head>
@@ -143,150 +184,150 @@ input, textarea{
 <body>
 
 <header>
-    <h1>🍧 Divino Açaí VV</h1>
-    <p>O verdadeiro sabor do açaí!</p>
-    <p>📷 Instagram: <b>@divinoacai.vv</b></p>
+<h1>🍧 Divino Açaí VV</h1>
+<p>O verdadeiro sabor do açaí</p>
 </header>
 
 <div class="container">
 
 <!-- PRODUTOS -->
 <div class="produtos">
-
+<script>
+const sabores=[
+["Morango Love 🍓","morango-love.jpg"],
+["Tradicional","tradicional.jpg"],
+["Banana 🍌","banana.jpg"],
+["Leite Ninho 🥛","ninho.jpg"],
+["Chocolate 🍫","chocolate.jpg"],
+["Paçoca 🥜","pacoca.jpg"]
+];
+document.write(sabores.map(s=>`
 <div class="card">
-<img src="morango-love.jpg">
+<img src="${s[1]}">
 <div class="card-content">
-<h3>Morango Love 🍓</h3>
+<h3>${s[0]}</h3>
 <div class="sizes">
-<button onclick="add('Morango Love 300ml',15)">300ml - R$15</button>
-<button onclick="add('Morango Love 500ml',20)">500ml - R$20</button>
+<button onclick="add('${s[0]} 300ml',15)">300ml - R$15</button>
+<button onclick="add('${s[0]} 500ml',20)">500ml - R$20</button>
 </div>
 </div>
-</div>
-
-<div class="card">
-<img src="tradicional.jpg">
-<div class="card-content">
-<h3>Tradicional</h3>
-<div class="sizes">
-<button onclick="add('Tradicional 300ml',15)">300ml - R$15</button>
-<button onclick="add('Tradicional 500ml',20)">500ml - R$20</button>
-</div>
-</div>
-</div>
-
-<div class="card">
-<img src="banana.jpg">
-<div class="card-content">
-<h3>Banana 🍌</h3>
-<div class="sizes">
-<button onclick="add('Banana 300ml',15)">300ml - R$15</button>
-<button onclick="add('Banana 500ml',20)">500ml - R$20</button>
-</div>
-</div>
-</div>
-
-<div class="card">
-<img src="ninho.jpg">
-<div class="card-content">
-<h3>Leite Ninho 🥛</h3>
-<div class="sizes">
-<button onclick="add('Leite Ninho 300ml',15)">300ml - R$15</button>
-<button onclick="add('Leite Ninho 500ml',20)">500ml - R$20</button>
-</div>
-</div>
-</div>
-
-<div class="card">
-<img src="chocolate.jpg">
-<div class="card-content">
-<h3>Chocolate 🍫</h3>
-<div class="sizes">
-<button onclick="add('Chocolate 300ml',15)">300ml - R$15</button>
-<button onclick="add('Chocolate 500ml',20)">500ml - R$20</button>
-</div>
-</div>
-</div>
-
-<div class="card">
-<img src="pacoca.jpg">
-<div class="card-content">
-<h3>Paçoca 🥜</h3>
-<div class="sizes">
-<button onclick="add('Paçoca 300ml',15)">300ml - R$15</button>
-<button onclick="add('Paçoca 500ml',20)">500ml - R$20</button>
-</div>
-</div>
-</div>
-
+</div>`).join(""));
+</script>
 </div>
 
 <!-- FORM -->
 <div class="form">
 <h3>📍 Dados do Cliente</h3>
-<input id="Nome" placeholder="Nome do cliente">
-<input id="endereco" placeholder="Endereço completo">
-<textarea id="obs" placeholder="Complementos, retirada ou entrega..."></textarea>
+<input id="Nome" placeholder="Nome">
+<input id="endereco" placeholder="Endereço">
+<textarea id="obs" placeholder="Observações"></textarea>
 
-<h3>💳 Forma de Pagamento</h3>
-<label><input type="radio" name="pagamento" value="Cartão"> Cartão</label><br>
-<label><input type="radio" name="pagamento" value="Dinheiro"> Dinheiro</label><br>
-<label><input type="radio" name="pagamento" value="Pix"> Pix</label>
-
-<div id="pixBox">
-<strong>⚡ Pagamento via Pix</strong><br>
-Chave Pix: <b>27997895768</b><br>
-Total: <span id="pixTotal"></span>
+<h3>🏷️ Cupom</h3>
+<div class="cupom-box">
+<input id="cupom" placeholder="Digite o cupom">
+<button onclick="aplicarCupom()">Aplicar</button>
 </div>
 
 <div class="total" id="total">Total: R$ 0,00</div>
-<button class="enviar" onclick="enviar()">Enviar Pedido no WhatsApp</button>
+<button class="enviar" onclick="enviar()">Enviar no WhatsApp</button>
 </div>
 
 </div>
 
-<div class="footer">
-📲 WhatsApp: <b>27 99789-5768</b>
+<!-- CARRINHO -->
+<div class="cart-btn" onclick="toggleCart()">🛒
+<span class="cart-count" id="cartCount">0</span>
 </div>
+
+<div class="cart-modal" id="cartModal">
+<h4>🛒 Seu carrinho</h4>
+<div id="cartItems"></div>
+<hr>
+<strong>Total: R$ <span id="cartTotal">0.00</span></strong>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
-let pedidos=[];
-let total=0;
+let carrinho=[];
+let desconto=0;
 
-function add(item,valor){
-    pedidos.push(item+" - R$ "+valor.toFixed(2));
-    total+=valor;
-    document.getElementById("total").innerText="Total: R$ "+total.toFixed(2);
-    document.getElementById("pixTotal").innerText="R$ "+total.toFixed(2);
+const cupons={
+    "DIVINO10":10,
+    "ACAI5":5
+};
+
+function toast(msg){
+    let t=document.getElementById("toast");
+    t.innerText=msg;
+    t.classList.add("show");
+    setTimeout(()=>t.classList.remove("show"),2000);
 }
 
-document.querySelectorAll('input[name="pagamento"]').forEach(el=>{
-    el.addEventListener('change',()=>{
-        document.getElementById("pixBox").style.display =
-            el.value==="Pix" ? "block" : "none";
+function add(item,valor){
+    let ex=carrinho.find(c=>c.item===item);
+    if(ex){ex.qtd++;} 
+    else{carrinho.push({item,valor,qtd:1});}
+    atualizar();
+    toast("Item adicionado ao carrinho 🛒");
+}
+
+function alterarQtd(i,delta){
+    carrinho[i].qtd+=delta;
+    if(carrinho[i].qtd<=0){
+        carrinho.splice(i,1);
+        toast("Item removido ❌");
+    }
+    atualizar();
+}
+
+function aplicarCupom(){
+    let c=cupom.value.toUpperCase();
+    if(cupons[c]){
+        desconto=cupons[c];
+        toast("Cupom aplicado 🎉");
+    }else{
+        desconto=0;
+        toast("Cupom inválido ❌");
+    }
+    atualizar();
+}
+
+function atualizar(){
+    let total=0;
+    let html="";
+    carrinho.forEach((c,i)=>{
+        total+=c.valor*c.qtd;
+        html+=`
+        <div class="cart-item">
+            ${c.item} x${c.qtd}
+            <div class="qtd">
+                <button onclick="alterarQtd(${i},-1)">−</button>
+                <button onclick="alterarQtd(${i},1)">+</button>
+            </div>
+        </div>`;
     });
-});
+    total=Math.max(0,total-desconto);
+    cartItems.innerHTML=html;
+    cartTotal.innerText=total.toFixed(2);
+    document.getElementById("total").innerText="Total: R$ "+total.toFixed(2);
+    cartCount.innerText=carrinho.reduce((s,c)=>s+c.qtd,0);
+}
+
+function toggleCart(){
+    cartModal.style.display=
+        cartModal.style.display==="block"?"none":"block";
+}
 
 function enviar(){
-    if(pedidos.length===0){
-        alert("Adicione pelo menos um açaí");
-        return;
-    }
-
-    let pagamento=document.querySelector('input[name="pagamento"]:checked');
-    if(!pagamento){
-        alert("Escolha a forma de pagamento");
-        return;
-    }
-
-    let msg="🍧 *Pedido - Divino Açaí VV* %0A%0A";
-    pedidos.forEach(p=>msg+="• "+p+"%0A");
-    msg+="%0A💰 Total: R$ "+total.toFixed(2)+"%0A";
-    msg+="💳 Pagamento: "+pagamento.value+"%0A";
-    msg+="Nome: "+document.getElementById("Nome").value+"%0A";
-    msg+="📍 Endereço: "+document.getElementById("endereco").value+"%0A";
-    msg+="📝 Obs: "+document.getElementById("obs").value;
-
+    if(!carrinho.length){toast("Carrinho vazio");return;}
+    let msg="🍧 *Pedido Divino Açaí* %0A%0A";
+    carrinho.forEach(c=>{
+        msg+=`• ${c.item} x${c.qtd}%0A`;
+    });
+    msg+=`%0A💰 Total: R$ ${cartTotal.innerText}%0A`;
+    msg+=`Nome: ${Nome.value}%0AEndereço: ${endereco.value}%0AObs: ${obs.value}`;
     window.open("https://wa.me/5527997895768?text="+msg);
 }
 </script>
