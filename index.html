@@ -6,44 +6,105 @@
 <title>Divino Açaí VV</title>
 
 <style>
+/* ================= BASE ================= */
 body{
     margin:0;
     font-family:'Segoe UI', Arial;
-    background:linear-gradient(135deg,#5e1675,#e91e63);
+    background:
+        linear-gradient(rgba(94,22,117,.75), rgba(233,30,99,.75)),
+        url('fundo-acai.jpg') center/cover fixed;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 header{
-    background:#fff;
     text-align:center;
-    padding:15px;
-    border-bottom:4px solid #e91e63;
+    padding:20px 10px;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(6px);
 }
-header h1{color:#e91e63;margin:5px 0;}
 
-/* CONTAINER */
-.container{max-width:900px;margin:auto;}
+.logo-box{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    padding:10px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#5e1675,#e91e63);
+    margin-bottom:8px;
+}
 
-/* GRID */
+.logo{
+    width:110px;
+    background:#fff;
+    border-radius:50%;
+    padding:6px;
+}
+
+header h1{
+    margin:6px 0;
+    color:#e91e63;
+}
+
+    header p{
+        margin:10px 0;
+        color:#5e1675;
+    }
+.insta a{
+    color:#5e1675;
+    font-weight:bold;
+    text-decoration:none;
+}
+.insta a:hover{
+    color:#e91e63;
+    text-decoration:underline;
+}
+
+/* STATUS */
+.status-box{
+    margin-top:8px;
+    font-weight:bold;
+}
+.aberto{color:green;}
+.fechado{color:red;}
+
+/* ================= CONTAINER ================= */
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding-bottom:120px;
+}
+
+/* ================= PRODUTOS ================= */
 .produtos{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:15px;
-    padding:10px;
+    padding:15px;
 }
 
-/* CARD */
 .card{
-    background:#fff;
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(6px);
     border-radius:15px;
     overflow:hidden;
     box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
-.card img{width:100%;height:220px;object-fit:cover;}
-.card-content{padding:12px;}
-.card-content h3{margin:0;color:#5e1675;}
 
-/* BOTÕES */
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:12px;
+}
+
+.card-content h3{
+    margin:0;
+    color:#5e1675;
+}
+
 .sizes button{
     width:100%;
     margin-top:6px;
@@ -55,35 +116,28 @@ header h1{color:#e91e63;margin:5px 0;}
     cursor:pointer;
 }
 
-/* FORM */
+/* ================= FORM ================= */
 .form{
-    background:#fff;
     margin:15px;
     padding:15px;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(6px);
     border-radius:15px;
 }
-input,textarea{
+
+input, textarea{
     width:100%;
     padding:10px;
     margin:6px 0;
     border-radius:8px;
     border:1px solid #ccc;
 }
-.total{text-align:center;font-size:18px;font-weight:bold;}
-.enviar{
-    width:100%;
-    padding:12px;
-    background:#5e1675;
-    color:#fff;
-    border:none;
-    border-radius:10px;
-}
 
-/* CUPOM */
 .cupom-box{
     display:flex;
     gap:5px;
 }
+
 .cupom-box button{
     background:#e91e63;
     color:#fff;
@@ -92,7 +146,24 @@ input,textarea{
     padding:10px;
 }
 
-/* CARRINHO */
+.total{
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.enviar{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#5e1675;
+    color:#fff;
+    font-size:16px;
+}
+
+/* ================= CARRINHO ================= */
 .cart-btn{
     position:fixed;
     bottom:20px;
@@ -103,12 +174,13 @@ input,textarea{
     color:#fff;
     border-radius:50%;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     font-size:24px;
     cursor:pointer;
     z-index:1000;
 }
+
 .cart-count{
     position:absolute;
     top:-5px;
@@ -120,19 +192,20 @@ input,textarea{
     border-radius:50%;
 }
 
-/* MODAL */
 .cart-modal{
     display:none;
     position:fixed;
     bottom:90px;
     right:20px;
     width:320px;
-    background:#fff;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(6px);
     border-radius:15px;
     padding:15px;
     box-shadow:0 6px 15px rgba(0,0,0,.3);
     z-index:1000;
 }
+
 .cart-item{
     display:flex;
     justify-content:space-between;
@@ -140,10 +213,12 @@ input,textarea{
     margin-bottom:8px;
     font-size:14px;
 }
+
 .qtd{
     display:flex;
     gap:5px;
 }
+
 .qtd button{
     width:25px;
     height:25px;
@@ -154,27 +229,35 @@ input,textarea{
     cursor:pointer;
 }
 
-/* TOAST */
+/* ================= TOAST ================= */
 .toast{
     position:fixed;
     bottom:100px;
     left:50%;
     transform:translateX(-50%) translateY(20px);
-    background:#323232;
+    background:#000;
     color:#fff;
     padding:12px 18px;
     border-radius:30px;
     opacity:0;
     transition:.4s;
     z-index:2000;
-    font-size:14px;
 }
 .toast.show{
     opacity:1;
     transform:translateX(-50%) translateY(0);
 }
 
-/* RESPONSIVO */
+/* ================= FOOTER ================= */
+footer{
+    background:rgba(0,0,0,.6);
+    color:#fff;
+    text-align:center;
+    padding:15px;
+    font-size:13px;
+}
+
+/* ================= RESPONSIVO ================= */
 @media(min-width:768px){
     .produtos{grid-template-columns:repeat(3,1fr);}
 }
@@ -184,39 +267,23 @@ input,textarea{
 <body>
 
 <header>
-<h1>🍧 Divino Açaí VV</h1>
-<p>O verdadeiro sabor do açaí</p>
-    <p>📷 @divinoacai.vv</p>
+    <div class="logo-box">
+        <img src="logo.png" class="logo">
+    </div>
+    <h1>🍧 Divino Açaí VV</h1>
+    <p>O verdadeiro sabor do açaí</p>
+    <p class="insta">📷 <a href="https://www.instagram.com/divinoacai.vv" target="_blank">@divinoacai.vv</a></p>
+
+    <div class="status-box">
+        ⏰ <span id="hora">--:--</span> —
+        <span id="status" class="fechado">FECHADO</span>
+    </div>
 </header>
 
 <div class="container">
 
-<!-- PRODUTOS -->
-<div class="produtos">
-<script>
-const sabores=[
-["Morango Love 🍓","morango-love.jpg"],
-["Tradicional","tradicional.jpg"],
-["Banana 🍌","banana.jpg"],
-["Leite Ninho 🥛","ninho.jpg"],
-["Chocolate 🍫","chocolate.jpg"],
-["Paçoca 🥜","pacoca.jpg"]
-];
-document.write(sabores.map(s=>`
-<div class="card">
-<img src="${s[1]}">
-<div class="card-content">
-<h3>${s[0]}</h3>
-<div class="sizes">
-<button onclick="add('${s[0]} 300ml',15)">300ml - R$15</button>
-<button onclick="add('${s[0]} 500ml',20)">500ml - R$20</button>
-</div>
-</div>
-</div>`).join(""));
-</script>
-</div>
+<div class="produtos" id="listaProdutos"></div>
 
-<!-- FORM -->
 <div class="form">
 <h3>📍 Dados do Cliente</h3>
 <input id="Nome" placeholder="Nome">
@@ -235,7 +302,11 @@ document.write(sabores.map(s=>`
 
 </div>
 
-<!-- CARRINHO -->
+<footer>
+🕒 Funcionamento: Terça a Domingo — 15:00 às 23:00<br><br>
+© RB Pages — Todos os direitos reservados — 2026
+</footer>
+
 <div class="cart-btn" onclick="toggleCart()">🛒
 <span class="cart-count" id="cartCount">0</span>
 </div>
@@ -247,60 +318,74 @@ document.write(sabores.map(s=>`
 <strong>Total: R$ <span id="cartTotal">0.00</span></strong>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-let carrinho=[];
-let desconto=0;
+/* ================= PRODUTOS ================= */
+const sabores=[
+["Morango Love 🍓","morango-love.jpg"],
+["Tradicional","tradicional.jpg"],
+["Banana 🍌","banana.jpg"],
+["Leite Ninho 🥛","ninho.jpg"],
+["Chocolate 🍫","chocolate.jpg"],
+["Paçoca 🥜","pacoca.jpg"]
+];
 
-const cupons={
-    "DIVINO10":10,
-    "ACAI5":5
-};
+document.getElementById("listaProdutos").innerHTML =
+sabores.map(s=>`
+<div class="card">
+<img src="${s[1]}">
+<div class="card-content">
+<h3>${s[0]}</h3>
+<div class="sizes">
+<button onclick="add('${s[0]} 300ml',15)">300ml - R$15</button>
+<button onclick="add('${s[0]} 500ml',20)">500ml - R$20</button>
+</div>
+</div>
+</div>
+`).join("");
+
+/* ================= CARRINHO ================= */
+let carrinho=[], desconto=0;
+const cupons={DIVINO10:10, ACAI5:5};
+
+const cartItems=document.getElementById("cartItems");
+const cartTotal=document.getElementById("cartTotal");
+const cartCount=document.getElementById("cartCount");
+const totalEl=document.getElementById("total");
+const toastEl=document.getElementById("toast");
 
 function toast(msg){
-    let t=document.getElementById("toast");
-    t.innerText=msg;
-    t.classList.add("show");
-    setTimeout(()=>t.classList.remove("show"),2000);
+    toastEl.innerText=msg;
+    toastEl.classList.add("show");
+    setTimeout(()=>toastEl.classList.remove("show"),2000);
 }
 
 function add(item,valor){
     let ex=carrinho.find(c=>c.item===item);
-    if(ex){ex.qtd++;} 
-    else{carrinho.push({item,valor,qtd:1});}
+    ex ? ex.qtd++ : carrinho.push({item,valor,qtd:1});
     atualizar();
     toast("Item adicionado ao carrinho 🛒");
 }
 
-function alterarQtd(i,delta){
-    carrinho[i].qtd+=delta;
-    if(carrinho[i].qtd<=0){
-        carrinho.splice(i,1);
-        toast("Item removido ❌");
-    }
+function alterarQtd(i,d){
+    carrinho[i].qtd+=d;
+    if(carrinho[i].qtd<=0) carrinho.splice(i,1);
     atualizar();
 }
 
 function aplicarCupom(){
-    let c=cupom.value.toUpperCase();
-    if(cupons[c]){
-        desconto=cupons[c];
-        toast("Cupom aplicado 🎉");
-    }else{
-        desconto=0;
-        toast("Cupom inválido ❌");
-    }
+    if(!cupom.value.trim()){toast("Digite um cupom");return;}
+    desconto=cupons[cupom.value.toUpperCase()]||0;
+    toast(desconto?"Cupom aplicado 🎉":"Cupom inválido ❌");
     atualizar();
 }
 
 function atualizar(){
     let total=0;
-    let html="";
-    carrinho.forEach((c,i)=>{
+    cartItems.innerHTML=carrinho.map((c,i)=>{
         total+=c.valor*c.qtd;
-        html+=`
+        return `
         <div class="cart-item">
             ${c.item} x${c.qtd}
             <div class="qtd">
@@ -308,29 +393,43 @@ function atualizar(){
                 <button onclick="alterarQtd(${i},1)">+</button>
             </div>
         </div>`;
-    });
+    }).join("");
     total=Math.max(0,total-desconto);
-    cartItems.innerHTML=html;
     cartTotal.innerText=total.toFixed(2);
-    document.getElementById("total").innerText="Total: R$ "+total.toFixed(2);
+    totalEl.innerText="Total: R$ "+total.toFixed(2);
     cartCount.innerText=carrinho.reduce((s,c)=>s+c.qtd,0);
 }
 
 function toggleCart(){
-    cartModal.style.display=
-        cartModal.style.display==="block"?"none":"block";
+    cartModal.style.display=cartModal.style.display==="block"?"none":"block";
 }
 
-function enviar(){
-    if(!carrinho.length){toast("Carrinho vazio");return;}
-    let msg="🍧 *Pedido Divino Açaí* %0A%0A";
-    carrinho.forEach(c=>{
-        msg+=`• ${c.item} x${c.qtd}%0A`;
-    });
-    msg+=`%0A💰 Total: R$ ${cartTotal.innerText}%0A`;
-    msg+=`Nome: ${Nome.value}%0AEndereço: ${endereco.value}%0AObs: ${obs.value}`;
-    window.open("https://wa.me/5527997895768?text="+msg);
+/* ================= HORÁRIO ================= */
+const horaEl=document.getElementById("hora");
+const statusEl=document.getElementById("status");
+
+function atualizarHorario(){
+    const agora=new Date();
+    const dia=agora.getDay(); // 0=Domingo
+    const h=agora.getHours();
+    const m=agora.getMinutes().toString().padStart(2,"0");
+
+    horaEl.innerText=`${h}:${m}`;
+
+    const diaValido = (dia >= 2 && dia <= 6) || dia === 0;
+    const horaValida = h >= 15 && h < 23;
+
+    if(diaValido && horaValida){
+        statusEl.innerText="ABERTO";
+        statusEl.className="aberto";
+    }else{
+        statusEl.innerText="FECHADO";
+        statusEl.className="fechado";
+    }
 }
+
+atualizarHorario();
+setInterval(atualizarHorario,60000);
 </script>
 
 </body>
