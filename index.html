@@ -8,9 +8,11 @@
 <style>
 body{
     margin:0;
-    font-family: 'Segoe UI', Arial;
+    font-family:'Segoe UI', Arial;
     background:linear-gradient(135deg,#5e1675,#e91e63);
 }
+
+/* HEADER */
 header{
     background:#fff;
     text-align:center;
@@ -23,44 +25,64 @@ header h1{
 }
 header p{
     margin:2px 0;
-    font-size:20px;
+    font-size:18px;
 }
+
+/* CONTAINER */
 .container{
-    max-width:500px;
+    max-width:900px;
     margin:auto;
 }
+
+/* GRID DE PRODUTOS */
+.produtos{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:15px;
+    padding:10px;
+}
+
+/* CARD */
 .card{
     background:#fff;
-    margin:15px;
     border-radius:15px;
     overflow:hidden;
     box-shadow:0 4px 12px rgba(0,0,0,.2);
 }
 .card img{
     width:100%;
-    height:500px;
+    height:220px;
     object-fit:cover;
 }
 .card-content{
-    padding:15px;
+    padding:12px;
 }
 .card-content h3{
     margin:0;
     color:#5e1675;
+    font-size:18px;
 }
+
+/* TAMANHOS */
 .sizes{
-    margin:10px 0;
+    margin-top:10px;
 }
 .sizes button{
-    width:48%;
+    width:100%;
     padding:10px;
-    margin:1%;
+    margin-top:6px;
     border:none;
     border-radius:8px;
     background:#e91e63;
     color:#fff;
-    font-size:15px;
+    font-size:14px;
+    cursor:pointer;
 }
+.sizes button:hover{
+    opacity:0.9;
+}
+
+/* FORM */
 .form{
     background:#fff;
     margin:15px;
@@ -73,6 +95,7 @@ input, textarea{
     margin:6px 0;
     border-radius:8px;
     border:1px solid #ccc;
+    font-size:14px;
 }
 .total{
     font-size:18px;
@@ -88,12 +111,31 @@ input, textarea{
     background:#5e1675;
     color:#fff;
     font-size:16px;
+    cursor:pointer;
 }
+
+/* PIX */
+#pixBox{
+    display:none;
+    margin-top:10px;
+    background:#f1f1f1;
+    padding:10px;
+    border-radius:8px;
+}
+
+/* FOOTER */
 .footer{
     text-align:center;
     color:#fff;
     font-size:13px;
     padding:15px;
+}
+
+/* RESPONSIVO */
+@media (min-width:768px){
+    .produtos{
+        grid-template-columns:repeat(3, 1fr);
+    }
 }
 </style>
 </head>
@@ -103,13 +145,14 @@ input, textarea{
 <header>
     <h1>🍧 Divino Açaí VV</h1>
     <p>O verdadeiro sabor do açaí!</p>
-    <p>Peça Aqui!</p>
     <p>📷 Instagram: <b>@divinoacai.vv</b></p>
 </header>
 
 <div class="container">
 
-<!-- SABOR -->
+<!-- PRODUTOS -->
+<div class="produtos">
+
 <div class="card">
 <img src="morango-love.jpg">
 <div class="card-content">
@@ -176,33 +219,24 @@ input, textarea{
 </div>
 </div>
 
+</div>
+
 <!-- FORM -->
 <div class="form">
 <h3>📍 Dados do Cliente</h3>
-    <input id="Nome" placeholder="Nome do cliente">
+<input id="Nome" placeholder="Nome do cliente">
 <input id="endereco" placeholder="Endereço completo">
 <textarea id="obs" placeholder="Complementos, retirada ou entrega..."></textarea>
-    <h3>💳 Forma de Pagamento</h3>
 
-<label>
-    <input type="radio" name="pagamento" value="Cartão">
-    Cartão
-</label><br>
+<h3>💳 Forma de Pagamento</h3>
+<label><input type="radio" name="pagamento" value="Cartão"> Cartão</label><br>
+<label><input type="radio" name="pagamento" value="Dinheiro"> Dinheiro</label><br>
+<label><input type="radio" name="pagamento" value="Pix"> Pix</label>
 
-<label>
-    <input type="radio" name="pagamento" value="Dinheiro">
-    Dinheiro
-</label><br>
-
-<label>
-    <input type="radio" name="pagamento" value="Pix">
-    Pix
-</label>
-
-<div id="pixBox" style="display:none; margin-top:10px; background:#f1f1f1; padding:10px; border-radius:8px;">
-    <strong>⚡ Pagamento via Pix</strong><br>
-    Chave Pix: <b>27997895768</b><br>
-    Total: <span id="pixTotal"></span>
+<div id="pixBox">
+<strong>⚡ Pagamento via Pix</strong><br>
+Chave Pix: <b>27997895768</b><br>
+Total: <span id="pixTotal"></span>
 </div>
 
 <div class="total" id="total">Total: R$ 0,00</div>
@@ -222,20 +256,14 @@ let total=0;
 function add(item,valor){
     pedidos.push(item+" - R$ "+valor.toFixed(2));
     total+=valor;
-    document.getElementById("total").innerText =
-        "Total: R$ "+total.toFixed(2);
+    document.getElementById("total").innerText="Total: R$ "+total.toFixed(2);
+    document.getElementById("pixTotal").innerText="R$ "+total.toFixed(2);
 }
 
 document.querySelectorAll('input[name="pagamento"]').forEach(el=>{
     el.addEventListener('change',()=>{
-        let pixBox=document.getElementById("pixBox");
-        if(el.value==="Pix"){
-            pixBox.style.display="block";
-            document.getElementById("pixTotal").innerText =
-                "R$ "+total.toFixed(2);
-        }else{
-            pixBox.style.display="none";
-        }
+        document.getElementById("pixBox").style.display =
+            el.value==="Pix" ? "block" : "none";
     });
 });
 
@@ -251,25 +279,17 @@ function enviar(){
         return;
     }
 
-    let formaPagamento=pagamento.value;
-
     let msg="🍧 *Pedido - Divino Açaí VV* %0A%0A";
     pedidos.forEach(p=>msg+="• "+p+"%0A");
     msg+="%0A💰 Total: R$ "+total.toFixed(2)+"%0A";
-    msg+="💳 Pagamento: "+formaPagamento+"%0A";
+    msg+="💳 Pagamento: "+pagamento.value+"%0A";
     msg+="Nome: "+document.getElementById("Nome").value+"%0A";
     msg+="📍 Endereço: "+document.getElementById("endereco").value+"%0A";
     msg+="📝 Obs: "+document.getElementById("obs").value;
 
-    if(formaPagamento==="Pix"){
-        msg+="%0A%0A⚡ *Pix para pagamento* %0A";
-        msg+="Chave: 27997895768";
-    }
-
     window.open("https://wa.me/5527997895768?text="+msg);
 }
 </script>
-
 
 </body>
 </html>
